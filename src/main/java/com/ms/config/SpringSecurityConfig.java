@@ -4,6 +4,7 @@ package com.ms.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -20,7 +21,12 @@ public class SpringSecurityConfig {
 	SecurityFilterChain securityFilterChain(HttpSecurity  http) throws Exception {
 		http
 			.csrf(csrf->csrf.disable())
-			.authorizeHttpRequests(authorize->authorize.anyRequest().authenticated())
+			.authorizeHttpRequests(authorize->{
+			authorize.requestMatchers(HttpMethod.POST, "/**").hasRole("ADMIN"); //Role based authentication
+			authorize.requestMatchers("/tasks/delete/**").hasRole("ADMIN"); //only admin can perform delete and post
+			authorize.requestMatchers("/tasks/edit/**").hasRole("ADMIN");
+			authorize.anyRequest().authenticated();
+			})
 			.httpBasic(Customizer.withDefaults());
 			
 		
