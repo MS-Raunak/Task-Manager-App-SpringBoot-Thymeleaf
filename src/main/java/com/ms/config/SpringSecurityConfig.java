@@ -26,7 +26,7 @@ public class SpringSecurityConfig {
 			//authorize.requestMatchers("/tasks/delete/**").hasRole("ADMIN"); //only admin can perform delete and post
 			//authorize.requestMatchers("/tasks/edit/**").hasRole("ADMIN");
 			//authorize.anyRequest().authenticated();
-			authorize.anyRequest().authenticated();
+			authorize.anyRequest().authenticated();   
 			})
 			.httpBasic(Customizer.withDefaults());
 			
@@ -36,7 +36,7 @@ public class SpringSecurityConfig {
 	
 	
 	//In-memory authentication
-	@Bean
+	/*@Bean
 	public UserDetailsService userDetailsService() {
 		UserDetails user = User.builder()
 						 .username("user")
@@ -50,8 +50,8 @@ public class SpringSecurityConfig {
 				            .build();
 		
 		return new InMemoryUserDetailsManager(user, user2);
-	}
-	
+	}*/
+
 	@Bean
 	PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
