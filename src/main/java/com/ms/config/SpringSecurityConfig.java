@@ -22,9 +22,10 @@ public class SpringSecurityConfig {
 		http
 			.csrf(csrf->csrf.disable())
 			.authorizeHttpRequests(authorize->{
-			authorize.requestMatchers(HttpMethod.POST, "/**").hasRole("ADMIN"); //Role based authentication
-			authorize.requestMatchers("/tasks/delete/**").hasRole("ADMIN"); //only admin can perform delete and post
-			authorize.requestMatchers("/tasks/edit/**").hasRole("ADMIN");
+			//authorize.requestMatchers(HttpMethod.POST, "/**").hasRole("ADMIN"); //Role based authentication
+			//authorize.requestMatchers("/tasks/delete/**").hasRole("ADMIN"); //only admin can perform delete and post
+			//authorize.requestMatchers("/tasks/edit/**").hasRole("ADMIN");
+			//authorize.anyRequest().authenticated();
 			authorize.anyRequest().authenticated();
 			})
 			.httpBasic(Customizer.withDefaults());
